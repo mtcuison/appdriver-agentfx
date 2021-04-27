@@ -328,8 +328,8 @@ public class PO_Master implements ITokenize{
         //get the level of purchase amount
         lsSQL = "SELECT nAuthEqlx" +
                 " FROM Purchase_Level" +
-                " WHERE nAmntThru <= " + (double) loJSON.get("nTranTotl") + 
-                " ORDER BY nAmntThru DESC" +
+                " WHERE nAmntThru >= " + (double) loJSON.get("nTranTotl") + 
+                " ORDER BY nAmntThru" +
                 " LIMIT 1";
         
         loRS = poGrider.executeQuery(lsSQL);
