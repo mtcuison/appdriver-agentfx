@@ -17,7 +17,7 @@ public class Debug {
         else
             System.out.print("System is not in debug mode. Unable output object.");
     }
-    
+    /*
     public static void Print(String foValue){
         if (System.getProperty("app.debug.mode").equals("1"))
             System.out.print(foValue);
@@ -70,7 +70,7 @@ public class Debug {
             System.out.print(foValue);
         else
             System.out.print("System is not in debug mode. Unable output object.");
-    }
+    }*/
     
     public static void Println(Object foValue){
         if (System.getProperty("app.debug.mode").equals("1"))
@@ -79,7 +79,7 @@ public class Debug {
             System.out.print("System is not in debug mode. Unable output object.");
     }
     
-    public static void Println(String foValue){
+    /*public static void Println(String foValue){
         if (System.getProperty("app.debug.mode").equals("1"))
             System.out.println(foValue);
         else
@@ -133,5 +133,5 @@ public class Debug {
             System.out.println(foValue);
         else
             System.out.print("System is not in debug mode. Unable output object.");
-    }
+    }*/
 }

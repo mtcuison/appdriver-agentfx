@@ -11,6 +11,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public class FileUtil {
+    public static boolean exists(String fsFile){
+        File afile = new File(fsFile);
+            
+        return afile.exists() && !afile.isDirectory();
+    }
+    
     public static boolean copyFile(String fsOrgDir, String fsCopyDir){
         InputStream inStream = null;
 	OutputStream outStream = null;

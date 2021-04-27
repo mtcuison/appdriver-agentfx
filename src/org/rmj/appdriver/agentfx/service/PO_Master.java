@@ -89,7 +89,7 @@ public class PO_Master implements ITokenize{
                 
                 lsSQL = "INSERT INTO Tokenized_Approval_Request SET" + 
                             "  sTransNox = " + SQLUtil.toSQL(MiscUtil.getNextCode("Tokenized_Approval_Request", "sTransNox", true, poGrider.getConnection(), poGrider.getBranchCode())) + 
-                            ", dTransact = " + SQLUtil.toSQL("2020-12-03") + 
+                            ", dTransact = " + SQLUtil.toSQL(poGrider.getServerDate()) + 
                             ", sSourceNo = " + SQLUtil.toSQL((String) loTrans.get("sSourceNo")) +
                             ", sSourceCd = " + SQLUtil.toSQL((String) loTrans.get("sSourceCD")) +
                             ", sRqstType = " + SQLUtil.toSQL((String) loTrans.get("sRqstType")) +
@@ -328,8 +328,8 @@ public class PO_Master implements ITokenize{
         //get the level of purchase amount
         lsSQL = "SELECT nAuthEqlx" +
                 " FROM Purchase_Level" +
-                " WHERE nAmntThru >= " + (double) loJSON.get("nTranTotl") + 
-                " ORDER BY nAmntThru" +
+                " WHERE nAmntThru <= " + (double) loJSON.get("nTranTotl") + 
+                " ORDER BY nAmntThru DESC" +
                 " LIMIT 1";
         
         loRS = poGrider.executeQuery(lsSQL);
@@ -357,7 +357,7 @@ public class PO_Master implements ITokenize{
         //get the level of purchase amount
         lsSQL = "SELECT nLevelxxx" +
                 " FROM Purchase_Level" +
-                " WHERE nAmntThru >= " + (double) foJSON.get("nTranTotl") + 
+                " WHERE nAmntThru <= " + (double) foJSON.get("nTranTotl") + 
                 " ORDER BY nAmntThru" +
                 " LIMIT 1";
         

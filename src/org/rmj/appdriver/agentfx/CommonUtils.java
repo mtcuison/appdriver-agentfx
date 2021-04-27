@@ -35,6 +35,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
@@ -233,7 +234,7 @@ public class CommonUtils {
         }
         
         return loJSON;
-    }
+    }   
     
     public static JSONArray RS2JSON(ResultSet foSource){        
         JSONArray loArray = new JSONArray();
@@ -532,6 +533,37 @@ public class CommonUtils {
         }
     }
     
+    public static boolean isBetween(int x, int lower, int upper) {
+        return lower <= x && x <= upper;
+    }
+    
+    public static String fixMobileNo(String fsMobileNo){
+        if (fsMobileNo.length() == 11){
+            if (fsMobileNo.substring(0, 1).equals("0"))
+                return "+63" + fsMobileNo.substring(1, 11);
+            else
+                return "";
+        } if (fsMobileNo.length() == 10){
+            if (fsMobileNo.substring(0, 1).equals("9"))
+                return "+63" + fsMobileNo.substring(0, 10);
+            else
+                return "";
+        } if (fsMobileNo.length() < 10){
+            return "";
+        } if (fsMobileNo.length() == 12){
+            if (fsMobileNo.substring(0, 2).equals("63"))
+                return "+" + fsMobileNo.substring(0, 12);
+            else
+                return "";
+        } if (fsMobileNo.length() == 13){
+            if (fsMobileNo.substring(0, 3).equals("+63"))
+                return fsMobileNo;
+            else
+                return "";
+        } else
+            return "";
+    }
+    
     public static boolean isValidEmail(String fsEmail)
     {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
@@ -621,6 +653,21 @@ public class CommonUtils {
 
         sf = null;
         return ret;
+    }
+    
+    public static int getDateMonth(Date foValue){
+        LocalDate localDate = foValue.toInstant().atZone(ZoneId.systemDefault().systemDefault()).toLocalDate();
+        return localDate.getMonthValue();
+    }
+    
+    public static int getDateDay(Date foValue){
+        LocalDate localDate = foValue.toInstant().atZone(ZoneId.systemDefault().systemDefault()).toLocalDate();
+        return localDate.getDayOfMonth();
+    }
+    
+    public static int getDateYear(Date foValue){
+        LocalDate localDate = foValue.toInstant().atZone(ZoneId.systemDefault().systemDefault()).toLocalDate();
+        return localDate.getYear();
     }
     
     public static Date dateAdd(Date date, int toAdd){
